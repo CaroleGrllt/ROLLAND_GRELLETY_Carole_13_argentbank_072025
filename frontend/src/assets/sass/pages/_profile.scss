@@ -1,0 +1,35 @@
+@use '../utils/variables' as v;
+@use '../utils/mixins';
+
+.profile-container {
+    height: 100%;
+    background-color: v.$deeppurple;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .header {
+        color: v.$white;
+        margin-bottom: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        h1 {
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .edit-button {
+            border-color: v.$green;
+            background-color: v.$green;
+            color: #fff;
+            font-weight: bold;
+            padding: 10px;
+        }
+    }
+
+    .accounts {
+        width: 100%;
+    }
+}

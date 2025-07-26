@@ -1,0 +1,68 @@
+@use '../utils/variables' as v;
+@use '../utils/mixins';
+
+article.account {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid black;
+    background-color: #fff;
+    width: 80%;
+    margin: 0 auto;
+    flex-direction: column;
+    padding: 1.5rem;
+    box-sizing: border-box;
+    text-align: left;
+    margin-bottom: 2rem;
+
+    @include mixins.sm {
+        flex-direction: row;
+    }
+
+    .account-content-wrapper {
+        width: 100%;
+        flex: 1;
+
+        .account-title {
+            margin: 0;
+            padding: 0;
+            font-size: 1rem;
+            font-weight: normal;
+            line-height: 1.8;
+        }
+
+        .account-amount {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        .account-amount-description {
+            margin: 0;
+            line-height: 2.3;
+
+        }
+
+        .transaction-button {
+            display: block;
+            width: 100%;
+            padding: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-top: 1rem;
+            border-color: v.$green;
+            background-color: v.$green;
+            color: v.$white;
+
+            @include mixins.sm {
+                width: 200px;
+            }
+        }
+
+        &.cta {
+            @include mixins.sm {
+                flex: 0;
+            }
+        }
+    }
+}

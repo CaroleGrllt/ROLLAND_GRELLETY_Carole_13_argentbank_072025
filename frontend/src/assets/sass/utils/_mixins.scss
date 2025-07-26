@@ -13,11 +13,11 @@
 //     }
 // }
 
-// @mixin sm {
-//     @media (min-width: 768px) {
-//         @content;
-//     }
-// }
+@mixin sm {
+    @media (min-width: 720px) {
+        @content;
+    }
+}
 
 @mixin md {
     @media (min-width: 920px) {

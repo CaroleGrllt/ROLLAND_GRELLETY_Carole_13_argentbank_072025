@@ -7,7 +7,7 @@ import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 
 export default function Header () {
 
-    const isConnected   = true
+    const isConnected   = false
     const firtName      = 'Tony'
 
     return (
