@@ -2,7 +2,8 @@
 
 export default function Footer () {
     return (
-        <header>
-        </header>
+        <footer>
+            <p className="footer-text">Copyright 2020 Argent Bank</p>
+        </footer>
     )
 }

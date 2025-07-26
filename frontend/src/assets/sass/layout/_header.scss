@@ -1,0 +1,32 @@
+@use '../utils/variables' as v;
+
+header {
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 20px;
+
+        a {
+            font-weight: 700;
+            color: v.$deepblue;
+            text-decoration: none;
+            margin-right: 0.5rem;
+
+            &:hover {
+               text-decoration: underline; 
+            }
+
+            .main-nav-logo {
+                display: flex;
+                align-items: center;
+            }
+
+            img {
+                max-width: 100%;
+                width: 200px;
+            }
+        }
+    }
+}
+

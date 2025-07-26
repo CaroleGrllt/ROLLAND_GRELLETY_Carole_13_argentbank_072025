@@ -1,42 +1,33 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from './layouts/layout.jsx'
-// import Home from './pages/Home';
+import Home from './pages/Home.jsx'
+import Login from './pages/Login.jsx'
+import Profile from './pages/Profile.jsx'
 
-
-// function NavigateTo() {
-// 	// const userId = '12';
-// 	// return (
-// 		// <Navigate
-// 		// 	to={`/user/${userId}`}
-// 		// 	replace
-// 		// />
-// 	// );
-// }
 
 export default function App() {
   const router = createBrowserRouter([
 		{
 			path: '/',
 			element: <Layout />,
-			// children: [
-			// 			{
-			// 				index: true,
-			// 				element: <NavigateTo />,
-			// 			},
-			// 			{
-			// 				path: '/user',
-			// 				element: <NavigateTo />,
-			// 			},
-			// 			{
-			// 				path: '/user/:id',
-			// 				element: <Home />,
-			// 				errorElement: <NavigateTo />
-			// 			},
-			// 			{
-			// 				path: '*',
-			// 				element: <NavigateTo />,
-			// 			},
-			// 	]
+			children: [
+						{
+							index: true,
+							element: < Home />,
+						},
+						{
+							path: '/login',
+							element: < Login />,
+						},
+						{
+							path: '/profile',
+							element: < Profile />,
+						},
+						{
+							path: '*',
+							element: < Home />,
+						},
+				]
 		}
 	]);
 

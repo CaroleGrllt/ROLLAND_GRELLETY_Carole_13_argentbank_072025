@@ -1,5 +1,7 @@
+@use './base/layout';
 @use './base/fonts';
 @use './base/normalize';
-
+@use './layout/header';
+@use './layout/footer';
 @use './utils/mixins';
 @use './utils/variables';

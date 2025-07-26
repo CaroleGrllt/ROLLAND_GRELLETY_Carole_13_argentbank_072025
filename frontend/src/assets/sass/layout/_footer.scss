@@ -1,0 +1,13 @@
+@use '../utils/variables' as v;
+
+footer {
+    display: flex;
+    justify-content: center;
+    border-top: 2px solid v.$lightgrey;
+    padding: 32px 0px;
+    color: v.$deepblue;
+
+    p {
+        margin: 0;
+    }
+}

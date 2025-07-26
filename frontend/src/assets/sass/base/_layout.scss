@@ -1,0 +1,13 @@
+@use '../utils/variables' as v;
+@use '../utils/mixins';
+
+body {
+    font-family: 'Avenir', sans-serif;
+    max-width: 1440px;
+    margin: auto 0;
+
+    #root {
+        display: grid;
+        grid-template-rows: 65px auto 80px;
+    }
+}
