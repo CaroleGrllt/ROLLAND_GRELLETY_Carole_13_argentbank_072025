@@ -1,0 +1,25 @@
+@use '../utils/variables' as v;
+@use '../utils/mixins';
+
+.sign-in-container {
+    height: 100%;
+    background-color: v.$deeppurple;
+    display: flex;
+    justify-content: center;  /* centre horizontalement */
+    align-items: center; 
+
+    article {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-sizing: border-box;
+        background-color: white;
+        width: 300px;
+        margin: 0 auto;
+        padding: 2rem;
+
+        h1 {
+            font-size: 1.5em;
+        }
+    }
+}

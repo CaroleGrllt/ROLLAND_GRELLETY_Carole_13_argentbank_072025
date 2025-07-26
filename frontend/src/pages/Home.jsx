@@ -18,6 +18,7 @@ export default function Home () {
                 {
                     featuresData.map(feature => 
                         <Feature 
+                            key={feature.id}
                             id={feature.id}
                             icon={feature.icon}
                             alt={feature.alt}
