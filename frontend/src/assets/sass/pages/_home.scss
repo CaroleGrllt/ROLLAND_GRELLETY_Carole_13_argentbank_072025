@@ -1,0 +1,63 @@
+@use '../utils/variables' as v;
+@use '../utils/mixins';
+
+.banner {
+    background-image: url('../../img/bank-tree.jpeg');
+    background-position: 0 -50px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 300px;
+    width: 100%;
+    position: relative;
+
+    @include mixins.md {
+        height: 400px;
+        background-position: 0% 33%;  
+    }
+
+    article {
+        position: relative;
+        top: 2rem;
+        width: 200px;
+        background: v.$white;
+        padding: 2rem;
+        text-align: left;
+        margin: 0 auto;
+
+        @include mixins.md {
+            position: absolute;
+            top: 50px;
+            right: 50px;
+            width: 300px;
+            margin: 2rem;
+        }
+
+        .subtitle {
+            font-weight: bold;
+            font-size: 1rem;
+            margin: 0;
+
+            @include mixins.md {
+                font-size: 1.5rem;
+            }
+        }
+
+        .text {
+            margin-bottom: 0;
+            font-size: 0.9rem;
+
+            @include mixins.md {
+                font-size: 1.2rem;
+            }
+        }
+    }
+}
+
+.features {
+    display: grid;
+    grid-template-columns: 1fr ;
+
+    @include mixins.md {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}

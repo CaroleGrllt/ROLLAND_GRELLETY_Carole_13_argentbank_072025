@@ -3,5 +3,7 @@
 @use './base/normalize';
 @use './layout/header';
 @use './layout/footer';
+@use './pages/home';
+@use './components/feature';
 @use './utils/mixins';
 @use './utils/variables';
