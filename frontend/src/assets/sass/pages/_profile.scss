@@ -18,6 +18,16 @@
         h1 {
             text-align: center;
             line-height: 1.5;
+            margin: 0;
+
+            &:first-child {
+                margin-top: 1em;
+            }
+
+            &:nth-child(2) {
+                margin-bottom: 1em;
+
+            }
         }
 
         .edit-button {
@@ -26,6 +36,30 @@
             color: #fff;
             font-weight: bold;
             padding: 10px;
+        }
+
+        form {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-gap: 10px;
+            margin-top: 1em;
+
+            @include mixins.sm {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            input {
+                padding: 10px;
+                font-size: 1.2rem;
+            }
+
+            button {
+                border-color: v.$green;
+                background-color: v.$green;
+                color: #fff;
+                font-weight: bold;
+                padding: 15px;
+            }
         }
     }
 
