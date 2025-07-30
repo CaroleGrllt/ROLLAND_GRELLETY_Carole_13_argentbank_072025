@@ -1,14 +1,15 @@
 import { useState } from "react";
-import { Link } from 'react-router-dom'
-
+import useDispatch from 'react-redux'
 
 export default function Form () {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [rememberMe, setRememberMe] = useState(false);
+    const dispatch = useDispatch()
+
 
   const handleSubmit = (e) => {
-    // e.preventDefault()
+    e.preventDefault()
   };
 
     return(
@@ -19,7 +20,7 @@ export default function Form () {
                     id='username' 
                     type='text'
                     value={username}
-                    onChange={(event) => setUsername(event.target.value)}
+                    onChange={(e) => setUsername(e.target.value)}
                 />
             </div>
             <div className='input-wrapper'>
@@ -28,7 +29,7 @@ export default function Form () {
                     id='password' 
                     type='password'
                     value={password}
-                    onChange={(event) => setPassword(event.target.value)}
+                    onChange={(e) => setPassword(e.target.value)}
                 />
             </div>
             <div className='input-remember'>
@@ -36,14 +37,11 @@ export default function Form () {
                     id='remember-me' 
                     type='checkbox' 
                     checked={rememberMe}
-                    onChange={(event) => setRememberMe(event.target.checked)}
+                    onChange={(e) => setRememberMe(e.target.checked)}
                 />
                 <label htmlFor='remember-me'>Remember me</label>
             </div>
-            {/* RETIRER LES LINKS !!! */}
-            <Link to='/profile'>
-                <button>Sign In</button>
-            </Link>
+            <button type="submit">Sign In</button>
         </form>
     )
 }

@@ -4,10 +4,12 @@ const databaseUrl =
 
 module.exports = async () => {
   try {
-    await mongoose.connect(databaseUrl, { useNewUrlParser: true })
+    console.log("Trying to connect to:", databaseUrl)
+    await mongoose.connect(databaseUrl, { useNewUrlParser: true, useUnifiedTopology: true })
     console.log('Database successfully connected')
   } catch (error) {
     console.error(`Database Connectivity Error: ${error}`)
     throw new Error(error)
   }
 }
+

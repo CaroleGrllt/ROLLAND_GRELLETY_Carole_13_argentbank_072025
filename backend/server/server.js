@@ -4,9 +4,11 @@ const cors = require('cors')
 const swaggerUi = require('swagger-ui-express')
 const yaml = require('yamljs')
 const swaggerDocs = yaml.load('./swagger.yaml')
+// PENSER A ECHANGER LES LIGNES 8 ET 10 POUR SE CONNECTER LOCALEMENT 
+dotEnv.config()
+
 const dbConnection = require('./database/connection')
 
-dotEnv.config()
 
 const app = express()
 const PORT = process.env.PORT || 3001
