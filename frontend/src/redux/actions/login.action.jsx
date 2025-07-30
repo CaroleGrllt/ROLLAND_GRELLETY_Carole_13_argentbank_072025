@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
+export const LOGOUT = 'LOGOUT'
 
 export const loginUser = (email, password, rememberMe) => {
   return async (dispatch) => {
@@ -47,4 +48,13 @@ export const loginUser = (email, password, rememberMe) => {
       throw new Error(errorMsg);
     }
   };
-};
+}
+
+export const logoutUser = () => {
+  return (dispatch) => {
+    localStorage.removeItem('token');
+    dispatch({ 
+      type: LOGOUT 
+    });
+  };
+}

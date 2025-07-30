@@ -1,14 +1,25 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Logo from '../assets/img/argentBankLogo.png'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutUser } from '../redux/actions/login.action';
 
 export default function Header () {
+    const navigateTo = useNavigate()
+    const dispatch = useDispatch()
 
-    const isConnected   = false
-    const firtName      = 'Tony'
+    const isConnected   = useSelector((state) => state.login.isConnected)
+    const firstName     = useSelector(state => state.user.firstName)
+
+
+    const handleLogout = () => {
+        dispatch(logoutUser())
+        navigateTo('/')
+    }
+
 
     return (
         <header>
@@ -22,12 +33,12 @@ export default function Header () {
                         <div className='connected__user__container'>
                             <Link className='main-nav-item' to='/profile'>
                                 <FontAwesomeIcon icon={faCircleUser} className='circle__connected__user' />
-                                {firtName}
+                                {firstName}
                             </Link>
-                            <Link className='main-nav-item' to='/'>
+                            <div className='main-nav-item' onClick={handleLogout}>
                                 <FontAwesomeIcon icon={faArrowRightFromBracket} className='logout__user' />
                                 Sign Out
-                            </Link>
+                            </div>
                         </div>
                     ):(
                         <div className='not__connected__user__container'>

@@ -9,7 +9,7 @@ export default function Form () {
     const dispatch = useDispatch()
     const navigateTo = useNavigate()
 
- const handleSubmit = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const username = form.current.username?.value

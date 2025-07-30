@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, LOGIN_FAIL } from "../actions/login.action"
+import { LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from "../actions/login.action"
 
 const initialState = {
   isConnected: false,
@@ -21,6 +21,12 @@ switch (action.type) {
         isConnected: false,
         token: null,
         error: action.payload,
+      };
+    case LOGOUT:
+      return {
+        isConnected: false,
+        token: null,
+        error: null,
       };
     default:
       return state;
