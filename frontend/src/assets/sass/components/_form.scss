@@ -9,7 +9,7 @@ form {
         margin-bottom: 1rem;
 
         input {
-            padding: 5px;
+            padding: 7px;
             font-size: 1.2rem;
         }
     }
@@ -31,6 +31,11 @@ form {
         background-color: v.$green;
         color: v.$white;
         border: none;
+    }
+
+    .error-message {
+        color: v.$red;
+        text-align: center;
     }
 }
 
