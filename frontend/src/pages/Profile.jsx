@@ -9,20 +9,24 @@ export default function Profile () {
     const dispatch      = useDispatch()
     const isConnected   = useSelector(state => state.login.isConnected)
     const token         = useSelector(state => state.login.token)
-   
+
+    const [editToggle, setEditToggle] = useState(false);
+    const [editFirstName, setEditFirstName] = useState('');
+    const [editlastName, setEditlastName] = useState('');
+
     useEffect(() => {
         if(token) {
-            dispatch(getUser(token))
+            dispatch(getUser(token)) //charge bon user au chargement ou lors changement token
         }
     }, [dispatch, token])
 
     const firstName = useSelector(state => state.user.firstName)
     const lastName = useSelector(state => state.user.lastName)
 
-    const [editToggle, setEditToggle] = useState(false);
-    const [editFirstName, setEditFirstName] = useState(firstName) 
-    const [editlastName, setEditlastName] = useState(lastName) 
-
+    useEffect(() => {
+    if (firstName) setEditFirstName(firstName) // charge bonne identité dans section greetings + inputs
+    if (lastName) setEditlastName(lastName)
+    }, [firstName, lastName]);
 
     const handleEdit = (e) => {
         e.preventDefault()
