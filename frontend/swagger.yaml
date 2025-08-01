@@ -1,0 +1,275 @@
+openapi: 3.0.4
+info:
+  title: Argent Bank API documentation
+  description: Contains all available API endpoints in this codebase
+  termsOfService: https://swagger.io/terms/
+  version: 1.0.12
+servers:
+  - url: https://localhost:3001/api/v1
+paths:
+  /user/accounts:
+    get: 
+      tags:
+        - User transactions
+      summary: All accounts
+      description: API to get all user accounts
+      security:
+        - bearerAuth: []
+      responses: 
+        '200':
+          description: All accounts retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/accounts'
+        '401':
+          description: Authorization information is missing or invalid.
+        '404':
+          description: A user with the specified ID was not found.
+        '500':
+          description: Internal Server Error
+
+  /user/accounts/{accountId}:
+    get:
+      tags:
+        - User transactions
+      summary: View all transactions for the current month by account
+      description: API to get all transactions for the current month by account
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: accountId
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the user account
+      responses:
+        '200':
+          description: Monthly transactions retrieved successfully
+          content: 
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/transactions'
+        '401':
+          description: Authorization information is missing or invalid.
+        '404':
+          description: An account with the specified ID was not found.
+        '500':
+          description: Internal Server Error
+
+  /user/accounts/{accountId}/{transactionId}:
+    get:
+      tags:
+        - User transactions
+      summary: View transaction details
+      description: API to get transaction details
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: accountId
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the user account
+        - in: path
+          name: transactionId
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the transaction
+      responses:
+        '200':
+          description: Transaction details retrieved successfully
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transactions'  
+        '401':
+          description: Authorization information is missing or invalid.
+        '404':
+          description: A transaction with the specified ID was not found.
+        '500':
+          description: Internal Server Error
+
+    post:
+      tags:
+        - User transactions
+      summary: Add fields to a transaction
+      description: API to add specific fields to a transaction
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: accountId
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the user account
+        - in: path
+          name: transactionId
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the transaction
+      requestBody:
+        description: Fields to add to the transaction
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createUpdateDelete'
+      responses:
+        '200':
+          description: Fields added successfully
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/transactions'
+        '401':
+          description: Authorization information is missing or invalid.
+        '404':
+          description: A transaction with the specified ID was not found.
+        '500':
+          description: Internal Server Error      
+
+    put:
+      tags:
+        - User transactions
+      summary: Update fields of a transaction
+      description: API to update specific fields of a transaction
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: accountId
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the user account
+        - in: path
+          name: transactionId
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the transaction
+      requestBody:
+        description: Fields to update in the transaction
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createUpdateDelete'
+      responses:
+        '200':
+          description: Fields updated successfully
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/transactions'
+        '401':
+          description: Authorization information is missing or invalid.
+        '404':
+          description: A transaction with the specified ID was not found.
+        '500':
+          description: Internal Server Error   
+
+    patch:
+      tags:
+        - User transactions
+      summary: Delete fields from a transaction
+      description: API to remove specific fields from a transaction (set to null)
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: accountId
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the user account
+        - in: path
+          name: transactionId
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the transaction
+      requestBody:
+        description: Fields to delete (send null)
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createUpdateDelete'
+      responses:
+        '200':
+          description: Fields removed successfully
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/transactions'
+        '401':
+          description: Authorization information is missing or invalid.
+        '404':
+          description: A transaction with the specified ID was not found.
+        '500':
+          description: Internal Server Error  
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  
+  schemas:
+    accounts:
+      type: array
+      items: 
+        $ref: '#/components/schemas/account'
+    
+    account: 
+      type: object
+      properties:
+        accountId:
+          type: integer
+        title:
+          type: string
+        amount:
+          type: number
+        transactions:
+          type: array
+          items: 
+            $ref: '#/components/schemas/transactions'
+    
+    transactions:
+      type: object
+      properties:
+        date:
+          type: string
+        description:
+          type: string
+        amount:
+          type: number
+        type:
+          type: string
+        category:
+          type: string
+        note:
+          type: string
+    
+    createUpdateDelete:
+      type: object
+      properties:
+        description:
+          type: string
+          nullable: true
+        category:
+          type: string
+          nullable: true
+        note:
+          type: string
+          nullable: true
