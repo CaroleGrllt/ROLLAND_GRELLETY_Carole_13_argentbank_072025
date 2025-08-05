@@ -3,16 +3,23 @@ import Account from "../components/Account";
 import accountData from '../data/accountData'
 import { editUser, getUser } from "../redux/actions/user.action";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate } from "react-router";
+import { useNavigate } from "react-router";
 
 export default function Profile () {
     const dispatch      = useDispatch()
+    const navigate      = useNavigate()
     const isConnected   = useSelector(state => state.login.isConnected)
     const token         = useSelector(state => state.login.token)
 
     const [editToggle, setEditToggle] = useState(false);
     const [editFirstName, setEditFirstName] = useState('');
     const [editlastName, setEditlastName] = useState('');
+
+    useEffect(() => {
+        if (!isConnected) {
+            navigate('/') // renvoie vers page d'accueil à la déconnexion ou si on tape /profile
+        }
+    }, [isConnected, navigate])
 
     useEffect(() => {
         if(token) {
@@ -48,7 +55,6 @@ export default function Profile () {
 
     return (
         <>
-        { isConnected ? (
             <div className="profile-container">
                 <section className="header">
                     <h1>Welcome back </h1>
@@ -91,9 +97,6 @@ export default function Profile () {
                     )}
                 </section>
             </div>
-            ) : (
-                <Navigate to="/login" replace />
-            )}
         </>
     )
 }
