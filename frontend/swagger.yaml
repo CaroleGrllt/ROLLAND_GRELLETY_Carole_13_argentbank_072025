@@ -177,11 +177,12 @@ paths:
         '500':
           description: Internal Server Error   
 
-    patch:
+  /user/accounts/{accountId}/{transactionId}/notes/{noteId}:
+    delete:
       tags:
         - User transactions
-      summary: Delete fields from a transaction
-      description: API to remove specific fields from a transaction (set to null)
+      summary: Delete a specific note from a transaction
+      description: API to delete a note by its ID from a transaction
       security:
         - bearerAuth: []
       parameters:
@@ -197,26 +198,21 @@ paths:
             type: integer
           required: true
           description: Numeric ID of the transaction
-      requestBody:
-        description: Fields to delete (send null)
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/createUpdateDelete'
+        - in: path
+          name: noteId
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the note to delete
       responses:
         '200':
-          description: Fields removed successfully
-          content:
-            application/json:
-              schema: 
-                $ref: '#/components/schemas/transactions'
+          description: Note deleted successfully
         '401':
           description: Authorization information is missing or invalid.
         '404':
-          description: A transaction with the specified ID was not found.
+          description: The note with the specified ID was not found.
         '500':
-          description: Internal Server Error  
+          description: Internal Server Error
 
 components:
   securitySchemes:
@@ -258,8 +254,10 @@ components:
           type: string
         category:
           type: string
-        note:
-          type: string
+        notes:
+          type: array
+          items:
+            $ref: '#/components/schemas/note'
     
     createUpdateDelete:
       type: object
@@ -270,6 +268,16 @@ components:
         category:
           type: string
           nullable: true
-        note:
-          type: string
+        notes:
+          type: array
           nullable: true
+          items:
+            $ref: '#/components/schemas/note'
+            
+    note:
+      type: object
+      properties:
+        noteId:
+          type: integer
+        content:
+          type: string
