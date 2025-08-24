@@ -35,21 +35,32 @@ export default function Profile () {
     if (lastName) setEditlastName(lastName)
     }, [firstName, lastName]);
 
+    const isValidName = (value) => {
+    if (!value) return false
+
+    // On enlève espaces au début/fin
+    const v = value.trim()
+
+    // Après trim, il ne doit pas être vide
+    if (v.length === 0) return false
+
+    // Regex : lettres accentuées + espaces internes + apostrophe + tiret
+    return /^[A-Za-zÀ-ÖØ-öø-ÿ' -]+$/.test(v)
+    }
     const handleEdit = (e) => {
         e.preventDefault()
 
-        const firstNameToSend = editFirstName || firstName
-        const lastNameToSend = editlastName || lastName
+        const firstNameToSend = isValidName(editFirstName) ?  editFirstName : firstName
+        const lastNameToSend = isValidName(editlastName) ? editlastName : lastName
 
         const userData = {
             firstName: firstNameToSend,
             lastName: lastNameToSend,
         }
 
-        console.log(userData.firstName)
-        console.log(userData.lastName)
-
         dispatch(editUser(userData.firstName, userData.lastName, token))
+        setEditFirstName(firstNameToSend)
+        setEditlastName(lastNameToSend)
         setEditToggle(false)
     }
 
@@ -61,9 +72,15 @@ export default function Profile () {
                     {!editToggle ? (
                         <>
                     <h1>{firstName} {lastName}</h1>        
-                        <button onClick={() => setEditToggle(!editToggle)} 
-                                className="edit-button">
-                                    Edit Name
+                        <button
+                            onClick={() => {
+                                setEditFirstName(firstName ?? '')
+                                setEditlastName(lastName ?? '')
+                                setEditToggle(true)
+                            }}
+                            className="edit-button"
+                            >
+                            Edit Name
                         </button>
                         </>
                     ) : ( 
@@ -81,7 +98,17 @@ export default function Profile () {
                                 onChange={(event) => setEditlastName(event.target.value)}
                             />
                             <button onClick={e => handleEdit(e)}>Save</button>
-                            <button onClick={() => setEditToggle(false)}>Cancel</button>
+                            <button
+                                type="button"
+                                className="cancel-btn"
+                                onClick={() => {
+                                    setEditFirstName(firstName ?? '')
+                                    setEditlastName(lastName ?? '')
+                                    setEditToggle(false)
+                                }}
+                            >
+                            Cancel
+                            </button>                        
                         </form>
                     )}
                 </section>

@@ -59,6 +59,11 @@
                 color: #fff;
                 font-weight: bold;
                 padding: 15px;
+
+                &.cancel-btn {
+                    background-color: v.$white;
+                    color: v.$green;
+                }
             }
         }
     }
