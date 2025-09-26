@@ -16,16 +16,16 @@ NPM
 ## Installation
 Suivez les étapes suivantes pour installer le projet localement :
 
-1. Clôner le dépôt du projet\
+1. Clôner le dépôt du projet  
 `git clone https://github.com/CaroleGrllt/ROLLAND_GRELLETY_Carole_13_argentbank_072025.git`
 
-2. Aller dans le dossier où le projet est cloné\ 
+2. Aller dans le dossier où le projet est cloné   
 `cd nom-de-votre-dossier`
 
-3. Configuer le back-end\
+3. Configuer le back-end  
 Merci de vous rendre sur le ReadMe du back-end ou [ICI](https://github.com/CaroleGrllt/ROLLAND_GRELLETY_Carole_13_argentbank_072025/blob/main/backend/README.md)
 
-4. Installer les dépendances du projet dans le dossier "frontend"\ 
+4. Installer les dépendances du projet dans le dossier "frontend"  
 `npm install`
 
 ## Lancer l'application
