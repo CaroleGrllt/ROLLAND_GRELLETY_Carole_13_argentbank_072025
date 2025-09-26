@@ -23,7 +23,7 @@ Suivez les étapes suivantes pour installer le projet localement :
 `cd nom-de-votre-dossier`
 
 3. Configuer le back-end :
-Pour celui, merci de vous rendre sur le ReadMe du back-end ou [ICI] (https://github.com/CaroleGrllt/ROLLAND_GRELLETY_Carole_13_argentbank_072025/blob/main/backend/README.md)
+Pour celui, merci de vous rendre sur le ReadMe du back-end ou [ICI](https://github.com/CaroleGrllt/ROLLAND_GRELLETY_Carole_13_argentbank_072025/blob/main/backend/README.md)
 
 4. Installer les dépendances du projet dans le dossier "frontend" : 
 `npm install`
