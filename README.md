@@ -30,7 +30,7 @@ Merci de vous rendre sur le ReadMe du back-end ou [ICI](https://github.com/Carol
 
 ## Lancer l'application
 Pour lancer l'application en mode développement, exécutez la commande suivante :\
-`npm run dev``
+`npm run dev`
 
 ## Stack
 - **React** : Framework JavaScript pour la création d'interfaces utilisateur.
