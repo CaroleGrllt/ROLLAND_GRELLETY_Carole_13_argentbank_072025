@@ -7,13 +7,13 @@ export const EDIT_USER = 'EDIT_USER';
 const API_BASE =
   (import.meta?.env?.VITE_API_URL || 'http://localhost:3001').replace(/\/$/, '');
 
-// Helper pour récupérer le token
-const getToken = (explicitToken?: string) =>
+// Helper pour récupérer le token (JS pur, pas de types)
+const getToken = (explicitToken) =>
   explicitToken ||
   localStorage.getItem('token') ||
   sessionStorage.getItem('token');
 
-export const getUser = (token?: string) => {
+export const getUser = (token) => {
   return async (dispatch) => {
     try {
       const tokenKey = getToken(token);
@@ -35,7 +35,6 @@ export const getUser = (token?: string) => {
 
       dispatch({ type: GET_USER, payload: userData });
       return userData;
-
     } catch (error) {
       const status = error?.response?.status;
       const serverMsg =
@@ -46,7 +45,6 @@ export const getUser = (token?: string) => {
 
       console.error('Failed to fetch user', { status, serverMsg });
 
-      // Optionnel: en cas de 401, on peut nettoyer le token
       if (status === 401) {
         localStorage.removeItem('token');
         sessionStorage.removeItem('token');
@@ -57,7 +55,7 @@ export const getUser = (token?: string) => {
   };
 };
 
-export const editUser = (firstName: string, lastName: string, token?: string) => {
+export const editUser = (firstName, lastName, token) => {
   return async (dispatch) => {
     try {
       const tokenKey = getToken(token);
@@ -79,7 +77,6 @@ export const editUser = (firstName: string, lastName: string, token?: string) =>
 
       dispatch({ type: EDIT_USER, payload: updateData });
       return updateData;
-
     } catch (error) {
       const status = error?.response?.status;
       const serverMsg =
