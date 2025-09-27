@@ -16,13 +16,16 @@ const PORT = process.env.PORT || 3001
 dbConnection()
 
 // Handle CORS issues
+const allowedOrigins = [
+  'http://localhost:5173',                        // dev Vite
+  'https://CaroleGrllt.github.io',                  // prod
+  'https://CaroleGrllt.github.io/ROLLAND_GRELLETY_Carole_13_argentbank_072025/'
+];
+
 app.use(cors({
-  origin: [
-    'https://CaroleGrllt.github.io',
-    'https://CaroleGrllt.github.io/ROLLAND_GRELLETY_Carole_13_argentbank_072025/'
-  ],
+  origin: allowedOrigins,
   credentials: true
-}))
+}));
 
 // Request payload middleware
 app.use(express.json())

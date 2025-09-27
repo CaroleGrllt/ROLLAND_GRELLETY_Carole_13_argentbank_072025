@@ -1,17 +1,27 @@
-import axios from "axios";
+import axios from 'axios';
 
-export const GET_USER = "GET_USER"
-export const EDIT_USER = "EDIT_USER"
+export const GET_USER = 'GET_USER';
+export const EDIT_USER = 'EDIT_USER';
 
-export const getUser = (token) => {
+// Base URL depuis .env / .env.production
+const API_BASE =
+  (import.meta?.env?.VITE_API_URL || 'http://localhost:3001').replace(/\/$/, '');
+
+// Helper pour récupérer le token
+const getToken = (explicitToken?: string) =>
+  explicitToken ||
+  localStorage.getItem('token') ||
+  sessionStorage.getItem('token');
+
+export const getUser = (token?: string) => {
   return async (dispatch) => {
     try {
-      const tokenKey = token || localStorage.getItem('token');
+      const tokenKey = getToken(token);
       if (!tokenKey) throw new Error('No token found');
 
       const response = await axios.post(
-        'http://localhost:3001/api/v1/user/profile',
-        {}, 
+        `${API_BASE}/api/v1/user/profile`,
+        {},
         {
           headers: {
             Authorization: `Bearer ${tokenKey}`,
@@ -20,51 +30,66 @@ export const getUser = (token) => {
         }
       );
 
-      console.log(response)
+      const userData = response?.data?.body ?? response?.data;
+      if (!userData) throw new Error('Invalid server response');
 
-      const userData = response.data.body; 
+      dispatch({ type: GET_USER, payload: userData });
+      return userData;
 
-      dispatch({
-        type: GET_USER,
-        payload: userData,
-      });
     } catch (error) {
-      console.error('Failed to fetch user:', error.message);
+      const status = error?.response?.status;
+      const serverMsg =
+        error?.response?.data?.message ||
+        error?.response?.data?.error ||
+        error?.message ||
+        'Network error';
+
+      console.error('Failed to fetch user', { status, serverMsg });
+
+      // Optionnel: en cas de 401, on peut nettoyer le token
+      if (status === 401) {
+        localStorage.removeItem('token');
+        sessionStorage.removeItem('token');
+      }
+
+      throw new Error(serverMsg);
     }
   };
 };
 
-export const editUser = (firstName, lastName, token) => {
-    return async (dispatch) => {
-        try {
-            const tokenKey = token || localStorage.getItem('token');
-            if (!tokenKey) throw new Error('No token found');
+export const editUser = (firstName: string, lastName: string, token?: string) => {
+  return async (dispatch) => {
+    try {
+      const tokenKey = getToken(token);
+      if (!tokenKey) throw new Error('No token found');
 
-            const response = await axios.put(
-                'http://localhost:3001/api/v1/user/profile',
-                {
-                    firstName,
-                    lastName,
-                },
-                {
-                    headers: {
-                        Authorization: `Bearer ${tokenKey}`,
-                        'Content-Type': 'application/json',
-                    },
-                }
-            );
-
-            console.log(response)
-
-            const updateData = response.data.body; 
-
-            dispatch({
-                type: EDIT_USER,
-                payload: updateData,
-            });
-
-        } catch (error) {
-            console.error('Failed to edit user:', error.message);
+      const response = await axios.put(
+        `${API_BASE}/api/v1/user/profile`,
+        { firstName, lastName },
+        {
+          headers: {
+            Authorization: `Bearer ${tokenKey}`,
+            'Content-Type': 'application/json',
+          },
         }
+      );
+
+      const updateData = response?.data?.body ?? response?.data;
+      if (!updateData) throw new Error('Invalid server response');
+
+      dispatch({ type: EDIT_USER, payload: updateData });
+      return updateData;
+
+    } catch (error) {
+      const status = error?.response?.status;
+      const serverMsg =
+        error?.response?.data?.message ||
+        error?.response?.data?.error ||
+        error?.message ||
+        'Network error';
+
+      console.error('Failed to edit user', { status, serverMsg });
+      throw new Error(serverMsg);
     }
-}
+  };
+};
