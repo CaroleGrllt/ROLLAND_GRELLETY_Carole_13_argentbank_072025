@@ -5,8 +5,9 @@ const swaggerUi = require('swagger-ui-express')
 const yaml = require('yamljs')
 const swaggerDocs = yaml.load('./swagger.yaml')
 // SWITCH LIGNES 8 ET 9 POUR SE CONNECTER LOCALEMENT OU DB DISTANTE
-const dbConnection = require('./database/connection')
+//ACTUELLEMENT EN DB
 dotEnv.config()
+const dbConnection = require('./database/connection')
 
 const app = express()
 const PORT = process.env.PORT || 3001
@@ -15,7 +16,13 @@ const PORT = process.env.PORT || 3001
 dbConnection()
 
 // Handle CORS issues
-app.use(cors())
+app.use(cors({
+  origin: [
+    'https://CaroleGrllt.github.io',
+    'https://CaroleGrllt.github.io/ROLLAND_GRELLETY_Carole_13_argentbank_072025/'
+  ],
+  credentials: true
+}))
 
 // Request payload middleware
 app.use(express.json())
@@ -33,6 +40,8 @@ app.get('/', (req, res, next) => {
   res.send('Hello from my Express server v2!')
 })
 
-app.listen(PORT, () => {
-  console.log(`Server listening on http://localhost:${PORT}`)
+app.get('/healthz', (_req, res) => res.send('ok'))
+
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server listening on port ${PORT}`)
 })
