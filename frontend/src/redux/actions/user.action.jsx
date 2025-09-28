@@ -4,8 +4,7 @@ export const GET_USER = 'GET_USER';
 export const EDIT_USER = 'EDIT_USER';
 
 // Base URL depuis .env / .env.production
-const API_BASE =
-  (import.meta?.env?.VITE_API_URL || 'http://localhost:3001').replace(/\/$/, '');
+const API_BASE = (import.meta.env.VITE_API_URL || 'http://localhost:3001').replace(/\/$/, '');
 
 // Helper pour récupérer le token (JS pur, pas de types)
 const getToken = (explicitToken) =>

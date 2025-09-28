@@ -5,8 +5,7 @@ export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
 
 // Base URL: .env/.env.production -> VITE_API_URL
-const API_BASE =
-  (import.meta?.env?.VITE_API_URL || 'http://localhost:3001').replace(/\/$/, '');
+const API_BASE = (import.meta.env.VITE_API_URL || 'http://localhost:3001').replace(/\/$/, '');
 
 export const loginUser = (email, password, rememberMe) => {
   return async (dispatch) => {
