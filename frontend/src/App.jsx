@@ -29,8 +29,11 @@ export default function App() {
 						},
 				]
 		}
-	]);
-
+	],
+	{
+      // clé: fait fonctionner l'app sous /ROLLAND_GRELLETY_Carole_13_argentbank_072025/
+      basename: import.meta.env.BASE_URL,
+    });
 	return <RouterProvider router={router} />;
 }
 
