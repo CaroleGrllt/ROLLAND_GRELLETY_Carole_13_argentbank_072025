@@ -32,6 +32,12 @@ Merci de vous rendre sur le ReadMe du back-end ou [ICI](https://github.com/Carol
 Pour lancer l'application en mode développement, exécutez la commande suivante :\
 `npm run dev`
 
+> Logs pour se connecter aux comptes de test : <br/><br/> utilisateur 1 :<br/>username : tony@stark.com<br/>password : password123<br/><br/> utilisateur 2 : <br/> username : steve@rogers.com<br/>password: password456
+
+### WARNING :
+Le back-end est géré par render.com, en version gratuite. Le service se met en veille après 15 mins d'inactivité. Chaque redémarrage du service demande quelques secondes (et jusqu'à 1 min). Si les données ne s'affichent pas immédiatement, patientez quelques secondes puis rafraîchissez la page.
+
+
 ## Stack
 - **React** : Framework JavaScript pour la création d'interfaces utilisateur.
 - **Vite** : Outil de build rapide pour les applications React.
