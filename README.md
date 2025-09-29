@@ -8,7 +8,7 @@ Intégrer le front-end et le connecter au back-end via des appels API.
 
 
 ## Prérequis 
-Avant de commencer, vous devez avoir installer sur votre machine : 
+Avant de commencer, vous devez avoir installé sur votre machine : 
 
 Node.js\
 NPM
